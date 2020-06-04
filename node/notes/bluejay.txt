@@ -1,0 +1,12 @@
+/index
+/invitation/create
+/invitation/list
+/feed/single
+/broadcast/create
+/broadcast/read/:broadcastId
+/login/login
+/login/logout
+/signup/start
+/signup/details
+/user/read/:userName
+/user/update

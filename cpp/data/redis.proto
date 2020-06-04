@@ -1,0 +1,27 @@
+syntax = "proto2";
+package vectorbook;
+message RedisResponse {
+	enum Code {
+		STRING = 1;
+		ARRAY = 2;
+		INTEGER = 3;
+		NIL = 4;
+		STATUS = 5;
+		ERROR = 6;
+		DOUBLE = 7;
+		BOOL = 8;
+		MAP = 9;
+		SET = 10;
+		ATTR = 11;
+		PUSH = 12;
+		BIGNUM = 13;
+	}
+	optional int32 error_code = 1;
+	oneof payload {
+		int32 int_value = 2;
+		double double_value = 3;
+		string string_value = 4;
+		bool bool_value = 6;
+	}
+	repeated RedisResponse child = 5;
+}

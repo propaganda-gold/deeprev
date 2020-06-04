@@ -1,0 +1,44 @@
+// Note: We convert to protos rather than use wrapper classes and/or
+// polymorphism so that these objects stay simple to learn and inspect.
+syntax = "proto2";
+package vectorbook;
+
+// Represents the actual "http request" as a proto.
+message HttpRequest {
+	// Copy the original request for debugging.
+	optional string original = 1;
+
+	// Request line.
+	optional string method = 2;
+	optional string uri = 3;
+
+	// Break the uri into parts when parsing.
+	repeated string uri_part = 8;
+	optional string version = 4;
+
+	// GET request.
+	map<string, string> GET = 5;
+
+	// POST request.
+	map<string, string> POST = 7;
+
+	// Cookies.
+	map<string, string> cookies = 6;
+
+	map<string, string> headers = 9;
+
+	// We store the user id here.
+	optional string validated_user_id = 10;
+}
+
+// Convenient representation of the response. Will be converted to an actual
+// "response" at the end.
+// TODO(greg) Factor out HtmlResponse.
+message HttpResponse {
+	optional int32 code = 1;
+	optional string content_type = 2;
+	repeated string cookie = 3;
+	optional string content = 4;
+
+	optional string json = 5;
+}

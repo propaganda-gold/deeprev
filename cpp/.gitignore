@@ -1,0 +1,19 @@
+# python
+*.pyc
+
+# c++
+*.so
+*.so.1
+
+# vim
+*.swp
+*.swo
+.netrwhist
+
+# javascript
+node_modules
+
+# just in case these get added
+*.png
+
+bazel-*

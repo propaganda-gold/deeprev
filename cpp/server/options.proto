@@ -1,0 +1,32 @@
+syntax = "proto2";
+package vectorbook;
+
+message RecaptchaRequiredFor {
+	optional bool application = 1;
+}
+
+message RestOptions {
+	// This is the domain name of the front end.
+	optional string frontend_domain = 1;
+
+	// Actually use the email system.
+	optional bool use_production_email = 2;
+	optional bool use_whitelist_email = 10;
+
+	// databases.
+	optional string redis_address = 6;
+	optional string cassandra_address = 7;
+
+	// recaptcha requirements
+	optional RecaptchaRequiredFor recaptcha_required_for = 9;
+}
+
+message Secrets {
+	optional string recaptcha_api = 1;
+	optional string sendgrid_api = 2;
+
+	repeated string whitelisted_email = 3;
+
+	// The URI for the MongoDB database instance.
+	optional string mongodb_uri = 4;
+}

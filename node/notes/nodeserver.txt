@@ -1,0 +1,43 @@
+cookie/login
+    args
+        logintoken
+
+cookie/logout
+    args 
+        authtoken
+
+signup/start
+    args   
+        signuptoken
+        uniqueName
+
+signup/finish
+    args   
+        authtoken
+        description
+        profile
+        picture
+
+user/picture
+    args   
+        authtoken
+        image
+
+user/update/description
+    args   
+        authtoken
+        value
+
+user/update/profile
+    args   
+        authtoken
+        value
+
+invitation/create
+    args
+        authtoken
+        email
+
+invitation/list
+    args
+        authtoken

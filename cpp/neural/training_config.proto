@@ -1,0 +1,42 @@
+syntax = "proto2";
+package vectorbook;
+
+message EmbeddingGroup {
+	optional string name = 1;
+	optional int32 embedding_dim = 3;
+}
+
+message FeatureSpec {
+	optional string name = 1;
+	optional string embedding_group = 2;
+}
+
+message OutputSpace {
+	// This corresponds to a feature *name* in Action.
+	optional string name = 1;
+
+	// This corresponds to a feature *value* in Action.
+	repeated string value = 2;
+}
+
+message ModelSpec {
+	optional bool is_set = 4;
+
+	// The dimension of the hidden layer.
+	optional int32 hidden_dim = 1;
+	// The embedding groups for the features.
+	repeated EmbeddingGroup embedding_group = 2;
+	// The features to use. Each embedding group must be already defined.
+	repeated FeatureSpec feature_spec = 3;
+
+	//
+	repeated OutputSpace output_space = 5;
+}
+
+message TrainingSpec {
+	optional bool is_set = 1;
+
+	// The number of "outside iterations" of training, whatever that is in
+	// context.
+	optional int32 num_outside_iterations = 2;
+}

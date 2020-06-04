@@ -1,0 +1,70 @@
+syntax = "proto2";
+package vectorbook;
+
+message SmtpConnection {
+	// Write these parameters to disk.
+	optional string smtp_address = 1;
+	optional string from_address = 2;
+	optional string password_file = 3;
+	optional string user_name = 5;
+
+	// This SHOULD NOT be part of the config written to version control.
+	optional string password = 4;
+}
+
+message SmtpRequest {
+	optional string date = 1;
+	optional string to_address = 2;
+	optional string message_id = 3;
+	optional string subject = 4;
+	optional string body = 5;
+}
+
+// TODO: Rename things as this isn't "smtp".
+message RecaptchaRequest {
+	optional string secret = 1;
+	optional string token = 2;
+}
+
+// TODO: Rename things as this isn't "smtp".
+message RecaptchaResponse {
+	optional bool success = 1;
+	optional double score = 2;
+	optional string challenge_ts = 3;
+	optional string hostname = 4;
+	optional string action = 5;
+	repeated string error_codes = 6 [json_name="error-codes"];
+}
+
+// TODO(P2): Should be in different file.
+message EmailRegistration {
+	optional RecaptchaResponse recaptcha_response = 1;
+	optional string timestamp = 2;
+	optional string email = 3;
+	optional string message_text = 4;
+
+	optional string confirmation_token = 5;
+	optional bool is_confirmed = 6 [default = false];
+	optional string confirmation_link = 7;
+
+	optional int32 priority_number = 8;
+}
+
+message EmailRegistrationResponse {
+	optional bool success = 1;
+	optional string error_message = 2;  // used if not success
+
+	optional string email = 3;
+	optional int32 priority_number = 4;
+}
+
+// TODO(P2) Should be in different file.
+message EmailValidationResponse {
+	optional bool success = 4;
+	optional string error_message = 5;  // used if not success
+
+	optional string email = 1;
+	optional int32 priority_number = 2;
+
+	optional bool already_confirmed = 3;
+}

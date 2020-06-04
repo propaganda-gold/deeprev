@@ -1,0 +1,25 @@
+{
+  "name": "forest-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "assert": "^2.0.0",
+    "async": "^3.2.0",
+    "cassandra-driver": "^4.5.1",
+    "cheerio": "^1.0.0-rc.3",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "get-urls": "^9.2.0",
+    "mongoose": "^5.9.6",
+    "multer": "^1.4.2",
+    "node-fetch": "^2.6.0",
+    "redis": "^3.0.2",
+    "uuid": "^7.0.3"
+  }
+}

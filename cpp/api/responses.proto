@@ -1,0 +1,46 @@
+syntax = "proto2";
+package vectorbook;
+
+import "data/vectorbook.proto";
+
+message RestError {
+	optional bool login_failed = 1;
+	optional bool queue_empty = 2;
+	optional bool email_already_registered = 3;
+	optional bool missing_input = 4;
+	optional bool emailtoken_not_found = 5;
+	optional bool user_name_already_registered = 6;
+	optional bool recaptcha_failure = 9;
+
+	optional string missing_argument = 7;
+	optional string route_not_found = 8;
+}
+
+message DebugInfo {
+	repeated string line = 1;
+}
+
+message RestResponse {
+	// Success/fail.
+	optional bool success = 1;
+	optional RestError error = 2;
+
+	// Debug
+	optional DebugInfo debug = 7; 
+
+	// Information.
+	optional string cookietoken = 3;
+	optional PublicUser public_user = 4;
+	optional Broadcast broadcast = 5;
+	repeated Broadcast broadcast_list = 10;
+	optional Action action = 6;
+
+	repeated Invitation invitation_list = 9;
+
+	// Only for the user that is being authenticated.
+	optional User self = 8;
+
+	optional Application application = 11;
+
+	optional Resource resource = 12;
+}

@@ -1,0 +1,33 @@
+hidden_dim: 32
+
+embedding_group {
+	name: "user"
+	embedding_dim: 8
+}
+embedding_group {
+	name: "subject"
+	embedding_dim: 8
+}
+embedding_group {
+	name: "object"
+	embedding_dim: 8
+}
+embedding_group {
+	name: "consumer"
+	embedding_dim: 8
+}
+
+feature_spec {
+	name: "consumer"
+	embedding_group: "user"
+}
+feature_spec {
+	name: "producer"
+	embedding_group: "user"
+}
+
+output_space {
+	name: "like"
+	value: "false"
+	value: "true"
+}

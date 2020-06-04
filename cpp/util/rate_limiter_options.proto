@@ -1,0 +1,14 @@
+syntax = "proto2";
+package vectorbook;
+
+// The user is allowed to make 'queries_per_bucket' queries in a bucket
+// 'seconds_per_bucket' long.
+message TokenBucketOptions {
+	optional int32 seconds_per_bucket = 1;
+	optional int32 queries_per_bucket = 2;
+}
+
+message TokenBucketTally {
+	optional int32 current_bucket = 1;
+	optional int32 current_tally = 2;
+}

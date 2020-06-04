@@ -1,0 +1,18 @@
+cassandra is a key-value store
+
+a "cluster" is made up of one or more "nodes"
+
+without a managed service, a user would be responsible for adding new "nodes", and adding them to the cluster.
+
+a client connects to any given node.
+
+"partitions".. paritions determine how data is stored on disk.
+
+
+partition key determines which "parition of the cluster" the data is stored on 
+
+
+key terms:
+    table
+    keyspace
+    

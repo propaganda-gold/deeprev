@@ -1,0 +1,175 @@
+// REFACTORING: this should be in vectorbook/primary_objects.proto.
+syntax = "proto2";
+package vectorbook;
+
+// A User in the system.
+message User {
+	// This id is internally generated. It is NOT the user's name or email.
+  optional string id = 1;
+
+	// Unique user-name.
+	optional string user_name = 2;
+	// Email that we send to user.
+	optional string email = 3;
+
+	optional string short_description = 4;
+	optional string long_description = 5;
+}
+
+// Non-private parts of a user.
+message PublicUser {
+	optional string id = 1;
+	optional string user_name = 2;
+	optional string short_description = 3;
+	optional string long_description = 5;
+}
+
+enum AccessType {
+	UNSET = 0;
+	PUBLIC = 1;
+	PRIVATE = 2;
+}
+
+// Note: Membership is managed in Redis.
+message Channel {
+	optional string id = 1;
+	optional AccessType access_type = 2;
+	optional string owner = 3;	// only relevant for private
+	optional string channel_name = 4;
+	optional string channel_description = 5;
+	optional int64 time_created = 6;
+}
+
+
+message Image {
+	optional string id = 1;
+	optional string type = 2;
+	optional string file_name = 3;
+	optional int64 time_created = 4;
+}
+
+// An individual link.
+message Resource {
+	// The id is a Time UUID, not the URL.
+	optional string id = 1;
+	optional string url = 2;
+	optional string title = 3;
+	optional Image image = 4;
+	optional int64 time_created = 5;
+}
+
+message Application {
+	optional string id = 1;
+	optional string email = 2;
+	optional string textarea = 3;
+	optional bool verified = 4;
+	optional int64 time_created = 7;
+}
+
+enum AcceptanceStatus {
+	NO_ACTION = 0;
+	ACCEPTED = 1;
+	REJECTED = 2;
+}
+
+message Invitation {
+	optional string id = 1;
+	optional string sponsor_id = 2;
+	optional string candidate_email = 3;
+	optional AcceptanceStatus acceptance_status = 5;
+	optional int64 time_created = 6;
+	optional int64 time_responded = 7;
+}
+
+// Invitation for a *private* channel.
+message ChannelInvitation {
+	optional string id = 1;
+	// These 'id's are alpha-numeirc.
+	optional string channel_id = 2;
+	optional string sponsor_id = 3;  // store this in case ever non-redundant
+	optional string candidate_id = 4;  // user invited.
+	optional AcceptanceStatus acceptance_status = 5;
+	optional int64 time_created = 6;
+	optional int64 time_responded = 7;
+}
+
+message Broadcast {
+	optional string id = 1;
+	message BasicData {
+		optional string textarea = 1;
+		optional string producer = 2;
+		optional string reference = 3;
+		optional string polarity = 4;
+	}
+	optional BasicData basic_data = 3;
+
+	// Contains the 'info' for a reference broadcast. A Broadcast includes a
+	// ReferenceInfo, rather than including its reference Broadcast recursively, to
+	// prevent deeply recursive structures.
+	message ReferenceInfo {
+		// This is the same as the reference's Broadcast.id().
+		optional string id = 1;
+		optional string textarea = 2;
+		optional Resource resource = 3;
+		optional BasicData basic_data = 4;
+		optional string producer_name = 5;
+	}
+	optional ReferenceInfo reference_info = 20;
+
+
+	// Each Token is associated with one 'word', and at most one 'link'.
+	message Token {
+		optional string word = 1;
+		optional string resource = 2;
+	}
+	message RenderingData {
+		repeated Token token = 3;
+
+		// Main resource for this entire broadcast.
+		optional Resource resource = 4;
+		
+		optional int64 time_created = 5;
+		optional ReferenceInfo reference_info = 7;
+		optional string producer_user_name = 6;
+
+	}
+	optional RenderingData rendering_data = 4;
+}
+
+message DoubleLabel {
+	optional string name = 1;
+	optional double value = 2;
+}
+
+message LabelPair {
+	optional string name = 1;
+	optional int32 value = 2;
+}
+
+message BooleanLabel {
+	optional string name = 1;
+	optional bool value = 2;
+}
+
+message BroadcastFeatures {
+	// ID of the object itself.
+	optional string broadcast = 1;
+	// 'consumer' side id for the subject of the action.
+	optional string consumer = 2;
+	// 'producer' side id for the person who create the object.
+	optional string producer = 3;
+}
+
+message Action {
+	optional string id = 1;
+	optional BroadcastFeatures broadcast_features = 2;
+	repeated BooleanLabel label = 3;
+}
+
+message DoubleVector {
+	repeated float weight = 1;
+}
+
+message ErrorResponse {
+	optional string error = 1;
+}

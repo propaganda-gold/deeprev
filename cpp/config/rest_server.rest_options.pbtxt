@@ -1,0 +1,9 @@
+frontend_domain: "http://localhost:8080"
+redis_address: "localhost"
+cassandra_address: "localhost"
+recaptcha_required_for {
+	application: true
+}
+
+use_production_email: false
+use_whitelist_email: true

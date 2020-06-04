@@ -1,0 +1,39 @@
+syntax = "proto2";
+
+import "data/vectorbook.proto";
+package vectorbook;
+
+message FeatureIndex {
+	optional string name = 1;
+
+	message NameIndex {
+		optional string name = 1;
+		optional int32 index = 2;
+	}
+	repeated NameIndex name_index = 2;
+}
+
+message Feature {
+	optional string name = 1;
+	optional string value = 2;
+	optional string embedding_group = 3;
+}
+
+message BooleanRequest {
+	// Input features.
+	repeated Feature feature = 1;
+
+	// Output request.
+	repeated string target = 2;
+}
+
+
+message BooleanResponse {
+	// Note: We return true and false explicitly for added safety.
+	repeated BooleanLabel label = 1;
+}
+
+message BooleanRequestAndResponse {
+	optional BooleanRequest request = 1;
+	optional BooleanResponse response = 2;
+}

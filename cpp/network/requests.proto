@@ -1,0 +1,11 @@
+syntax = "proto2";
+package vectorbook;
+
+message SendgridRequest {
+	optional string to_address = 1;
+	optional string from_address = 2;
+	optional string from_name = 6;
+	optional string subject = 3;
+	optional string body = 4;
+	optional string secret = 5;
+}

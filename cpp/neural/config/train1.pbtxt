@@ -1,0 +1,16 @@
+num_outside_iterations: 12000
+model_spec {
+	hidden_dim: 4
+	embedding_group {
+		name: "user"
+		embedding_dim: 3
+	}
+	feature_spec {
+		name: "action_author"
+		embedding_group: "user"
+	}
+	feature_spec {
+		name: "post_author"
+		embedding_group: "user"
+	}
+}

@@ -1,0 +1,8 @@
+login plan for the first launch:
+
+1) greg can send you an invitation link
+	don't implement invitations
+2) you can use that link to create a user
+3) once you have a user, you can log in
+	only emails that are recognized can be mailed
+4) you can delete your account

@@ -1,0 +1,19 @@
+syntax = "proto2";
+package vectorbook;
+
+message UserRequest {
+	// ID for the user. Unique, but user-selected.
+	optional string user_name = 1;
+	// The user's email. This is used for identification.
+	optional string email = 2;
+}
+
+message LinkRequest {
+	// The url for the link.
+	optional string url = 1;
+}
+
+message InvitationRequest {
+	optional string inviter_id = 1;
+	optional string invitee_email = 2;
+}
